@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: heqinga.github.io
+url: heqingha.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -79,6 +79,6 @@ theme: hexo-theme-xups
 
 deploy:
   type: git
-  repo: https://github.com/heqinga/heqinga.github.io 
+  repo: https://github.com/heqingha/heqingha.github.io 
   branch: master
   message: 部署成功了，赶紧看看吧
