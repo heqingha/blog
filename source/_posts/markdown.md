@@ -117,6 +117,8 @@ This is [an example](#jump) reference-style link.
 
 > 图片引用类似于链接引用。图片可以是网络图片，也可以是本地图片，本地图片建议放在source/images目录中，按年月建立两层目录放置便于归档。本地图片的url类似为/images/year/month/img.png。
 
+```![alt MyEmail](/images/myemail.png "MyEmail")```
+
 ![alt MyEmail](/images/myemail.png "MyEmail")
 
 ## 8.代码
