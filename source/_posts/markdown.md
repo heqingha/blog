@@ -6,9 +6,10 @@ categories:
 tags: 语法
 ---
 
-## Markdown是什么?
 > Markdown是一种可以使用普通文本编辑器编写的[标记语言](https://baike.baidu.com/item/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/5964436?fr=aladdin, '标记语言')，通过简单的标记语法，它可以使普通文本内容具有一定的格式
+
 <!-- more -->
+
 ## 用途
 > Markdown的语法简洁明了、学习容易，而且功能比纯文本更强，因此有很多人用它写博客 当然还有其他的用途
 
