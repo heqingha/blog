@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-author: heqing
+author: Sophie
 categories:
 - 
 tags:

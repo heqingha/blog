@@ -1,6 +1,5 @@
 ---
 title: vsCode插件
-author: heqing
 categories:
   - 工具
 tags:

@@ -1,6 +1,5 @@
 ---
 title: Git
-author: heqing
 categories:
   - 工具
 tags:
