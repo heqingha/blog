@@ -19,7 +19,7 @@ date: 2017-11-05 21:49:20
 
 > 类式继承需要将第一个类的实例赋值给第二个类的原型
 
-```
+```javascript
 // 父类
 function SuperClass() {
     this.SuperValue = true;
@@ -68,13 +68,13 @@ var sub = new SubClass();
 
 instanceof通过判断对象的_proto_与构造函数的prototype，来确定这个对象是否是某个类的实例，而不关心对象与类的自身结构
 
-```
+```javascript
 console.log(sub instanceof SubClass);         //true
 console.log(sub instanceof SuperClass);       //true
 console.log(SubClass instanceof SuperClass);  //false
 
-why false??
-instanceof 是判断前面的对象是否是后面类的实例，他并不表示两者的继承，
+// why false??
+// instanceof 是判断前面的对象是否是后面类的实例，他并不表示两者的继承，
 console.log(SubClass.prototype instanceof SuperClass); //true
 
 ```
@@ -83,7 +83,7 @@ console.log(SubClass.prototype instanceof SuperClass); //true
 
 * 由于子类通过其原型Prototype对父类实例化，继承了父类，所以说父类中的共有属性要是引用类型，就会在子类中被所有属性共有，因此一个子类的实例更改子类原型从父类构造函数中继承来的共有属性就会直接影响到其他子类
 
-```
+```javascript
 function SuperClass() {
     this.books = ['javascript', 'html', 'css']
     this.a = 12
@@ -102,7 +102,7 @@ console.log(instance2.a)
 
 ### 创建即继承---构造函数继承
 
-```
+```javascript
 // 构造函数继承
 // 声明父类
 function SuperClass(id) {
@@ -158,7 +158,7 @@ apply()方法 接收两个参数，一个是函数运行的作用域（this）�
 
 > 构造函数式继承式通过在子类的构造函数作用环境中执行一次父类的构造函数来实现。
 
-```
+```javascript
 // 组合式继承
 // 声明父类
 
@@ -203,7 +203,7 @@ instance2.getTime();
 
 ### 洁净的继承者---原型式继承
 
-```
+```javascript
 function inheritObject(o) {
     // 声明一个过渡函数对象
     function F() {}
@@ -219,7 +219,7 @@ function inheritObject(o) {
 
 是的，！！！，不过这种方式由于F过渡类的构造函数中无内容，所以开销比较小，使用起来也比较方便，
 
-```
+```javascript
 var book = {
     name: 'js book',
     alikeBook: ['css book', 'html book']
@@ -246,7 +246,7 @@ console.log(book.alikeBook)
 ### 如虎添翼---寄生式继承
 
 
-```
+```javascript
 // 寄生式继承
 // 声明基对象
 var book = {
@@ -284,7 +284,7 @@ console.log(a2.alikeBook)
 
 > 之前学习了组合继承，就是将类式继承通构造函数继承组合，这种方式存在的问题就是子类不是父类的实例，而子类的原型式父类的实例，因此才有了寄生组合式继承。是寄生式继承与构造函数继承的组合，但是这里寄生式继承有点特殊，这里他处理的不是对象，而是类的原型。
 
-```
+```javascript
 function inheritObject(o) {
     // 声明一个过渡函数对象
     function F() {}
@@ -305,7 +305,7 @@ function inheritPrototype(SubClass, SuperClass) {
 
 > 在寄生组合式继承中，通过构造函数继承的属性和方法是没有问题的吗，这里主要探究通过寄生式继承重新继承父类的原型，我们需要继承的仅仅是父类的原型，不在需要调用父类的构造函数，换句话说，在构造函数继承中，我们已经调用了父类的构造函数，因此我们需要的就是父类的原型对象的一个副本，而这个副本我们我们通过原型继承便可得到，但是直接赋值个子类会有问题，因为对父类原型对象复制得到的复制对象p中的constroctor指向的不是SubClass子类对象，因此在寄生式继承中要对复制对象p做一次增强，修复其constroctor属性指向不正确问题，最后将得到的复制对象p赋值给子类的原型，这样子类的原型就继承了父类的原型并且没有执行父类的构造函数。
 
-```
+```javascript
 // 寄生式继承  继承原型
 // 传递参数  SuperClass  父了
 // 传递参数  SubClass    子类
