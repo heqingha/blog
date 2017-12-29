@@ -1,7 +1,7 @@
 ---
 title: vsCode插件
 categories:
-  - 工具
+  - 前端技术
 tags:
   - vsCode插件
 date: 2017-12-03 13:38:50

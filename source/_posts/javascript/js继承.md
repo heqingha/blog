@@ -1,7 +1,7 @@
 ---
 title: js继承
 categories:
-  - javascript设计模式
+  - 前端技术
 tags:
   - js继承
 date: 2017-11-05 21:49:20

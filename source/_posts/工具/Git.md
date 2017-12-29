@@ -1,7 +1,7 @@
 ---
 title: Git
 categories:
-  - 工具
+  - 前端技术
 tags:
   - Git
 date: 2017-10-24 20:06:50

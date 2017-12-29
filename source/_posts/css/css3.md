@@ -4,8 +4,27 @@ date: 2017-10-17 14:37:12
 tags:
 - css3
 categories:
-- css
+- 前端技术
 ---
+
+## <span id='0'>[calc()使用](http://www.w3cplus.com/css3/how-to-use-css3-calc-function.html)</span>
+
+> 能实现自适应的布局 box-sizing, 浏览器对calc()的兼容性还算不错，在IE9+、FF4.0+、Chrome19+、Safari6+都得到较好支持著作权归作者所有。不过calc()最大的好处就是用在流体布局上(百分比)，可以通过calc()计算得到元素的宽度高度
+
+<!-- more -->
+
+```css
+    #div{
+        float: left;
+        width: 50%;
+        width:calc(50% - 2px - 80px);
+        height: 100px;
+        background: red;
+        border: thin solid;
+        padding: 40px;
+        //box-sizing: border-box;
+    }
+```
 
 * [calc()使用](#0)
 * [边框](#1)
@@ -20,32 +39,12 @@ categories:
 * [用户界面](#10)
 * [弹性盒](#11)
 
-## <span id='0'>[calc()使用](http://www.w3cplus.com/css3/how-to-use-css3-calc-function.html)</span>
-
-> 能实现自适应的布局 box-sizing, 浏览器对calc()的兼容性还算不错，在IE9+、FF4.0+、Chrome19+、Safari6+都得到较好支持著作权归作者所有。不过calc()最大的好处就是用在流体布局上(百分比)，可以通过calc()计算得到元素的宽度高度
-<!-- more -->
-```
-    #div{
-        float: left;
-        width: 50%;
-        width:calc(50% - 2px - 80px);
-        height: 100px;
-        background: red;
-        border: thin solid;
-        padding: 40px;
-        //box-sizing: border-box;
-    }
-```
-
-
 ## <span id='1'>边框</span>
-
-
 
 > 用 CSS3，你可以创建圆角边框，添加阴影框，并作为边界的形象而不使用设计程序
 
 * border-radius (圆角)
-```
+```css
     <div id='div'></div>
     #div
     {
@@ -56,7 +55,7 @@ categories:
     }
 ```
 * box-shadow  (盒阴影)
-```
+```css
     #div
         {
             width: 200px;
@@ -86,7 +85,7 @@ categories:
 
 * background-size: 100% 100%(200px 200px)注:(写成px的时候不包含padding 加box-sizing: border-box 一样)   (规定背景的绘制区域)
 
-```
+```css
     #div {
         width: 200px;
         height: 200px;
@@ -100,7 +99,7 @@ categories:
 ```
 * background-origin  (content-box(只填充内容区域)、padding-box(包含padding) 或 border-box(包含边框) ) =>  相对于背景图片(背景色完全没有作用  规定背景图片的定位区域)
 
-```
+```css
     #div {
         width: 200px;
         height: 200px;
@@ -116,7 +115,7 @@ categories:
 ```
 * background-clip (content-box(只填充内容区域)、padding-box(包含padding) 或 border-box(包含边框) )=>相对于背景色(对图片的padding content 有作用  对border-box无用(默认就是))  (规定背景图片的尺寸)
 
-```
+```css
     #div {
         width: 200px;
         height: 200px;
@@ -140,7 +139,7 @@ categories:
 
 * 线性渐变 background: linear-gradient(direction(90deg), color-stop1, color-stop2, ...);
 
-```
+```css
     #div 
         {
         width: 200px;
@@ -155,7 +154,7 @@ categories:
 
 * 径向渐变 background: radial-gradient(center, shape(ellipse/circle) size, start-color, ..., last-color);
 
-```
+```css
     #div
         {
             width: 200px;
@@ -168,7 +167,7 @@ categories:
 ## <span id='4'>文本效果</span>
 
 * text-shadow: 5px(水平阴影)   5px(垂直阴影)   10px(模糊距离)   green;
-```
+```css
     #div
         {
             width: 200px;
@@ -179,7 +178,7 @@ categories:
 ```
 * word-wrap:break-word(自动换行)   文字超出会自动换行    字母 数字 标点符号不换  (ps不兼容 Opera)
 
-```
+```css
  #div
     {
         width: 200px;
@@ -202,7 +201,8 @@ categories:
 * transform:matrix(0.866,0.5,-0.5,0.866,0,0)         (matrix()方法,六个参数，包含旋转，缩放，移动（平移）和倾斜功能)
 * transform-origin:0 0;                              (允许改变被转换元素的位置,默认元素中心点)
 
-```#div
+```css
+    #div
     {
         width: 200px;
         height: 200px;
@@ -244,7 +244,7 @@ categories:
 * transition-timing-function ([规定速度效果的速度曲线](http://www.runoob.com/cssref/css3-pr-transition-timing-function.html)   linear|ease|ease-in|ease-out|ease-in-out)
 * transition-delay (效果延时多少开始)
 
-```
+```css
     #div
         {
             width:100px;
@@ -265,7 +265,7 @@ categories:
 * animation:myfirst 5s linear 2s infinite alternate;
 * animation-play-state:running/paused (属性规定动画正在运行还是暂停 js中使用 可以控制动画暂停与播放)
 
-```
+```css
     #div 
         {
             width: 100px;
@@ -295,7 +295,7 @@ categories:
 * column-span 属性规定元素应横跨多少列  (column-span: 1 / all)
 * columns 属性是一个简写属性，用于设置列宽和列数   (columns:100px(4) 3(1);)
 
-```
+```css
     <div id="div">
         <h2>英国维斯米斯特教堂碑文</h2>
         当我年轻的时候，我梦想改变这个世界；当我成熟以后，我发现我不能够改变这个世界，我将目光缩短了些，决定只改变我的国家；当我进入暮年以后，我发现我不能够改变我们的国家，我的最后愿望仅仅是改变一下我的家庭，但是，这也不可能。当我现在躺在床上，行将就木时，我突然意识到：如果一开始我仅仅去改变我自己，然后，我可能改变我的家庭；在家人的帮助和鼓励下，我可能为国家做一些事情；然后，谁知道呢?我甚至可能改变这个世界。
@@ -322,7 +322,7 @@ categories:
 
 * 调整尺寸(Resizing)
 
-```
+```css
     <div id='div'>调整属性指定一个元素是否由用户可调整大小的</div>
     #div
         {
@@ -335,7 +335,7 @@ categories:
 ```
 * 外形修饰（outline-offset ）
 
-```
+```css
     <div id='div'>
         这个 div有一个轮廓边界15 px边境外的边缘。Internet Explorer 不兼容 outline-offset属性.
     </div>
@@ -383,7 +383,7 @@ categories:
 * align-self (在弹性子元素上使用。覆盖容器的 align-items 属性): auto | flex-start | flex-end | center | baseline | stretch
 * flex (设置弹性盒子的子元素如何分配空间): auto | initial | none | inherit |  [ flex-grow ] || [ flex-shrink ] || [ flex-basis ]
 
-```
+```css
     <div class="flex-container">
         <div class="flex-item">flex item 1</div>
         <div class="flex-item">flex item 2</div>
