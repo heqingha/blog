@@ -110,6 +110,7 @@ be 动词的过去时否定式为 was not 和 were not，对应的缩写形式�
 	They did yoga.
 	She brought a gift.
 	I went jogging
+	to cut a long story short  长话短说
 
 ### 2. 语法
 
