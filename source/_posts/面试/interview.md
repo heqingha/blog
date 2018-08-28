@@ -20,7 +20,7 @@ date: 2018-08-23 15:52:40
 - [Javascript 垃圾收集方法？](#4)
 
 - [简单写出 vue 的 MVVM 实现原理](#5)
-
+dsd
 ### <span id='1'>1. 请写出一种实现深拷贝的方法？</span>
 
 ```js
@@ -81,6 +81,8 @@ var objDeepCopy = function(source) {
 ```
 
 ### <span id='5'>5. 简单写出 vue 的 MVVM 实现原理</span>
+
+[vue 双向绑定原理](https://juejin.im/entry/5923973da22b9d005893805a)
 
 ```js
 ```
