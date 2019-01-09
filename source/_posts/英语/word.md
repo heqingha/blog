@@ -7,7 +7,7 @@ tags: 英语
 ---
 
 > word
-
+<!--more -->
 vomiting  吐         
 nauseous  恶心      
 dizzy   头晕    

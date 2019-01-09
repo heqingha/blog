@@ -20,7 +20,15 @@ date: 2018-08-23 15:52:40
 - [Javascript 垃圾收集方法？](#4)
 
 - [简单写出 vue 的 MVVM 实现原理](#5)
-dsd
+
+- [实现 es5reduce 的方法](#6)
+
+- [使用 es5 实现 Promise](#7)
+
+- [什么是单线程和异步有何关系](#8)
+
+- [JavaScript 中的 Currying(柯里化) 和 Partial Application(偏函数应用)](#9)
+
 ### <span id='1'>1. 请写出一种实现深拷贝的方法？</span>
 
 ```js
@@ -84,7 +92,34 @@ var objDeepCopy = function(source) {
 
 [vue 双向绑定原理](https://juejin.im/entry/5923973da22b9d005893805a)
 
+### <span id='6'>6. 实现 es5reduce 的方法</span>
+
 ```js
+// reduce() 从数组第一项开始，逐个遍历到最后
+// reduceRight() 从数组的最后一项开始，向前遍历到第一项
+// 都支持4个参数。(prev【前一个值】,cur【当前值】,index【项的索引】,array【数组对象】)
+// reduce()和reduceRight()的差别在于从哪头开始遍历数组。除此之外都一样。
+// 【兼容性】IE9+,Chrome,Firefox 3+,Safari 4+,Opera 10.5支持
+// 这个函数返回的任何值都会作为第一个参数自动传给下一项。第一次迭代从数组的第二项开始。
+//利用reduce求数组中所有值的和
+var values = [1, 2, 3, 4, 5];
+var sum = values.reduce(function(prev, cur, index, array) {
+  return prev + cur;
+});
+//sum的值为15;
 ```
+
+### <span id='7'>7. 使用 es5 实现 Promise</span>
+
+[实现一个自己的 promise](https://blog.csdn.net/yibingxiong1/article/details/68075416)
+
+### <span id='8'>8. 什么是单线程,和异步有何关系</span>
+
+[异步和单线程](https://blog.csdn.net/ll_0801xyz/article/details/78232621)
+[JavaScript 运行机制详解：再谈 Event Loop](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)
+
+### <span id='9'>9. JavaScript 中的 Currying(柯里化) 和 Partial Application(偏函数应用)</span>
+
+[css88](http://www.css88.com/archives/7781)
 
 [2018 最新 Web 前端经典面试试题及答案](https://blog.csdn.net/wdlhao/article/details/79079660)

@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-author: Sophie
+author: Hope
 categories:
 - 
 tags:
