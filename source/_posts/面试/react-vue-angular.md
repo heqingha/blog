@@ -7,7 +7,7 @@ tags:
 date: 2019-02-24 18:51:20
 ---
 
-> 前端三大框架概念区别简总结（angular,react,vue）
+> 前端三大框架概念区别简总（angular,react,vue）
 
 <!--- more -->
 
@@ -18,6 +18,7 @@ date: 2019-02-24 18:51:20
    用户 User 通过控制器 Controller 来操作模板 Model 从而达到视图 View 的变化。数据直接从数据库读取
 
 2. MVP：是从 MVC 模式演变而来的，都是通过 Controller/Presenter 负责逻辑的处理+Model 提供数据+View 负责显示。
+
 
    在 MVP 中，Presenter 完全把 View 和 Model 进行了分离，主要的程序逻辑在 Presenter 里实现。
    并且，Presenter 和 View 是没有直接关联的，是通过定义好的接口进行交互，从而使得在变更 View 的时候可以保持 Presenter 不变。
