@@ -1,9 +1,9 @@
 ---
-title: vsCode插件
+title: vscode plug-in
 categories:
-  - 前端技术
+  - web skill
 tags:
-  - vsCode插件
+  - plug-in
 date: 2017-12-03 13:38:50
 ---
 

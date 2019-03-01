@@ -1,13 +1,13 @@
 ---
-title: 前端框架
+title: web framework
 categories:
-  - 前端技术
+  - web framework
 tags:
-  - 前端框架
+  - web framework
 date: 2019-02-24 18:51:20
 ---
 
-> 前端三大框架概念区别简总（angular,react,vue）
+> Summary of the three framework concepts of the front end
 
 <!--- more -->
 
@@ -88,8 +88,7 @@ date: 2019-02-24 18:51:20
     },
     updated: function() {
       // 更新完成状态
-      // this.$el     undefined
-      // this.$data   [obiect object] 已进行数据绑定
+      // ..........
       // this.message 触发组件更新
     },
     beforeDestroy: function() {
@@ -102,15 +101,16 @@ date: 2019-02-24 18:51:20
     }
   });
   ```
-
-  总结：
+  **总结**：
 
   1. **首先创建一个实例，new vue 过程中执行 init（vue 组件默认执行），init 过程中调用 beforeCreate**
-  2. **后在 injections（注射）和 reactivity（反应性）的时候，调用 created，created 完成之后，此时已经完成了双向数据绑定**
+  2. **后在 injections（注射）和 reactivity（反应性）的时候，调用 created，此时已经完成了双向数据绑定**
   3. **beforeMount 中，去判断实例里面是否含有“el”选项，若无，调用 vm.$mount(el)方法，若有，去判断是否有“template”，若有，它会把template解析成一个render function，(其实这个hook function中就是相关的render函数被调用，此时$el 还只是我们在 HTML 里面写的节点)，**
      `render函数选项 > template选项 > outer HTML.（render函数优先级）`
+     `el 的判断要在template，因为vue要通过el找到对应的 outer HTML`
   4. **之后 mounted，就把渲染出来的内容挂载到了 DOM 节点上**
-  5. **当数据变化的时候，调用 beforeUpdate，经过 Virtual DOM，之后调用 updated 更新 dom，**
+  5. **当数据变化时，调用beforeUpdate，此时可以监听到data的变化，但是view还未被重新渲染，经过 Virtual DOM**
+  6. **updated 中，更新 dom， view改变，**
   6. **beforeDestroy，实例销毁之前，这个 hook 实例仍可用**
   7. **destroyed 实例销毁后调用。实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。**
 
@@ -127,19 +127,16 @@ class Test extends Component {
   componentWillMount() {
     // 在组件挂载到DOM前调用，且只会被调用一次，在这边调用this.setState不会引起组件重新渲染，也可以把写在这边的内容提前到constructor()中，所以项目中很少用。
   }
-
+  render() {
+    //  多次被执行的render，第一个render 页面首次加载，根据组件的props和state，return 一个React元素，不负责组件实际渲染工作，之后由React自身根据此元素去渲染出页面DOM。render是纯函数，不能在里面执行this.setState，会有改变组件状态的副作用。
+  }
   componentDidMount() {
     //   组件挂载到DOM后调用，且只会被调用一次
   }
-  //   父组件重新render引起子组件重新render的情况有两种，
-  //   1.  每当父组件重新render导致的重传props，子组件将直接跟着重新渲染，无论props是否有变化。可通过shouldComponentUpdate方法优化。
-  // 2. 在componentWillReceiveProps方法中，将props转换成自己的state
   componentWillReceiveProps(nextProps) {
     //   此方法只调用于props引起的组件更新过程中，参数nextProps是父组件传给当前组件的新props。但父组件render方法的调用不能保证重传给当前组件的props是有变化的，所以在此方法中根据nextProps和this.props来查明重传的props是否改变，以及如果改变了要执行啥，比如根据新的props调用this.setState出发当前组件的重新render
   }
-
   shouldComponentUpdate(nextProps, nextState) {
-    // 应该使用这个方法，否则无论props是否有变化都将会导致组件跟着重新渲染
     // 此方法通过比较nextProps，nextState及当前组件的this.props，this.state，返回true时当前组件将继续执行更新过程，返回false则当前组件更新停止，以此可用来减少组件的不必要渲染，优化组件性能。
     if (nextProps.someThings === this.props.someThings) {
       return false;
@@ -148,19 +145,21 @@ class Test extends Component {
   componentWillUpdate(nextProps, nextState) {
     //   此方法在调用render方法前执行，在这边可执行一些组件更新发生前的工作，一般较少用。
   }
+  render() {
+    // 当用户操作页面 数据改变时，在componentWillUpdate 之后执行render函数
+  }
   componentDidUpdate(prevProps, prevState) {
     //   此方法在组件更新后被调用，可以操作组件更新的DOM，prevProps和prevState这两个参数指的是组件更新前的props和state
-  }
-  render() {
-    //   根据组件的props和state，return 一个React元素，不负责组件实际渲染工作，之后由React自身根据此元素去渲染出页面DOM。render是纯函数，不能在里面执行this.setState，会有改变组件状态的副作用。
-    // 反复调用
   }
   componentWillUnmount() {
     //   此方法在组件被卸载前调用，可以在这里执行一些清理工作，比如清楚组件中使用的定时器，清楚componentDidMount中手动创建的DOM元素等，以避免引起内存泄漏。
   }
 }
 ```
-
+ 造成组件更新的情况，
+   1. 父组件重新渲染，父组件重新render导致重传props，子组件将直接跟着重新渲染，无论props是否有变化。可通过shouldComponentUpdate方法优化。（二种情况，子组件直接使用props，子组件将props作为state使用）
+   2. 组件本事本身调用 setState
+ 
 只执行一次： constructor、componentWillMount、componentDidMount
 
 执行多次：render 、子组件的 componentWillReceiveProps、componentWillUpdate、componentDidUpdate

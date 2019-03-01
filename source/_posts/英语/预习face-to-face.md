@@ -2,8 +2,8 @@
 title: face-to-face预习
 date: 2017-12-29 22:47:58
 categories:
-- 英语
-tags: 英语
+- English
+tags: English
 ---
 
 > 小班面授课，face-to-face

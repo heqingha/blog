@@ -1,13 +1,13 @@
 ---
-title: 前端面试
+title: browser & js 
 categories:
-  - 前端技术
+  - web skill
 tags:
-  - 前端面试
+  - web skill
 date: 2019-02-22 09:44:20
 ---
 
-> 前端知识点 summarize
+> browser Browser thread & operational mechanism of js 
 
 <!--- more -->
 

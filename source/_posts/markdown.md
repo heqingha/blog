@@ -2,8 +2,8 @@
 title: Markdown
 date: 2017-10-17 13:49:58
 categories:
-- 前端技术
-tags: 语法
+- web skill
+tags: web skill
 ---
 
 > Markdown是一种可以使用普通文本编辑器编写的[标记语言](https://baike.baidu.com/item/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/5964436?fr=aladdin, '标记语言')，通过简单的标记语法，它可以使普通文本内容具有一定的格式

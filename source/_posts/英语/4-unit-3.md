@@ -2,8 +2,8 @@
 title: 4-unit-3
 date: 2017-01-10 13:59:58
 categories:
-- 英语
-tags: 英语
+- English
+tags: English
 ---
 
 > 4-unit-3，加入英孚，整理每个单元所学的重点词汇，语法，句子，以及各种阅读技巧和英语听力，汇总各个场合的口语。

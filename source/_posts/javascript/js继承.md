@@ -1,7 +1,7 @@
 ---
 title: js继承
 categories:
-  - 前端技术
+  - web skill
 tags:
   - js
 date: 2017-11-05 21:49:20

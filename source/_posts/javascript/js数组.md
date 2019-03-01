@@ -1,7 +1,7 @@
 ---
 title: js数组
 categories:
-  - 前端技术
+  - web skill
 tags:
   - js
 date: 2018-05-07 11:03:28

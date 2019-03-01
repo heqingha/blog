@@ -4,7 +4,7 @@ date: 2017-10-17 14:37:12
 tags:
 - css3
 categories:
-- 前端技术
+- web skill
 ---
 
 ## <span id='0'>[calc()使用](http://www.w3cplus.com/css3/how-to-use-css3-calc-function.html)</span>

@@ -1,13 +1,13 @@
 ---
-title: 前端面试
+title: Interview issue
 categories:
-  - 前端技术
+  - Interview
 tags:
-  - 前端面试
+  - Interview
 date: 2018-04-12 10:03:20
 ---
 
-> 总结网易前端面试的一些题目，做准备， I will go to work in big wangyi company next year，Wish myself good luck.
+> there are some Interview issue in article
 
 <!--- more -->
 

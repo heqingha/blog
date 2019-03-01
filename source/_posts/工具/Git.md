@@ -1,7 +1,7 @@
 ---
 title: Git
 categories:
-  - 前端技术
+  - web skill
 tags:
   - Git
 date: 2017-10-24 20:06:50

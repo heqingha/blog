@@ -1,9 +1,9 @@
 ---
-title: 单词
+title: English
 date: 2018-05-31 15:03:58
 categories:
-- 英语
-tags: 英语
+- English
+tags: English
 ---
 
 > word

@@ -1,13 +1,13 @@
 ---
-title: 前端面试
+title: Interview issue
 categories:
-  - 前端技术
+  - Interview
 tags:
-  - 前端面试
+  - Interview
 date: 2018-08-23 15:52:40
 ---
 
-> 2108 前端面试题整理
+> Interview issue
 
 <!--- more -->
 
