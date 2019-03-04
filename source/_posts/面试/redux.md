@@ -167,4 +167,41 @@ last attach a pic of react-redux
 
 来源： https://www.w3ctech.com/topic/1561
 
-2. dva (一个简化erdux 的库)
+2. dva (一个简化 erdux 的库)
+
+> dva 是基于现有应用架构 (redux + react-router + redux-saga 等)的一层轻量封装，没有引入任何新概念，是框架，不是 library，类似 emberjs，会很明确地告诉你每个部件应该怎么写，这对于团队而言，会更可控
+
+dva 中的 model 实际上类似于封装了 redux 里面的 action 和 reducer，并给每个 model 提供一个 namespace 交于 strore 管理。这样，在外部引用的时候，可以直接获取到 model 对应的 namespace，然后根据 namespace 获取数据。
+
+dva-cli 可快速初始化一个项目，基于 Roadhog(一个 cli 工具,提供 server、 build 和 test 命令)，可在.roadhogrc.js 自行配置转发，插件等需要的
+
+```js
+// npm i dva-cli -g
+// dva new project
+// npm i
+// npm start
+
+import dva from "dva";
+import createLoading from "dva-loading";
+import { browserHistory } from "dva/router";
+
+// 1. Initialize
+const app = dva({
+  onError(e) {
+    // message.error(e.message, 3);
+  }
+  //history: browserHistory,
+});
+
+// 2. Plugins
+app.use(createLoading({ effects: true }));
+
+// 3. Model
+app.model(require("./models/app"));
+
+// 4. Router
+app.router(require("./router"));
+
+// 5. Start
+app.start("#root");
+```
