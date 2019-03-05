@@ -13,7 +13,7 @@ date: 2019-03-01 16:42:20
 
 # 1. use react with redux and react-router
 
-### Redux → Store &nbsp; Action &nbsp; Reducer
+### Redux → Store &nbsp; Action &nbsp; Reducer (下面分开介绍，并附上主代码)
 
 ### Store（一个应用只有一个 store，将 action 和 reducer 联系在一起）
 
@@ -98,7 +98,7 @@ const MOUNT_NODE = document.getElementById("app");
 // 需要定义路由文件
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store} >
     <Router children={routes} />
   </Provider>,
   MOUNT_NODE
@@ -128,24 +128,23 @@ function mapDispatchToProps(dispatch) {
 // 两种connect的方法 both ok
 export default connect(mapStateToProps, mapDispatchToProps)(Component)
 ```
-
 ### router
 
 ```js
 export default {
   path: "/",
-  tableName: "home",
+  tableName: "app",
   component: require("COMPONENT/App").default,
   childRoutes: [
     {
-      path: "home",
+      path: "app",
       getComponent(nextState, callback) {
         require.ensure(
           [],
           require => {
-            callback(null, require("CONTAINER/home").default);
+            callback(null, require("CONTAINER/app").default);
           },
-          "home"
+          "app"
         );
       }
     },
@@ -165,22 +164,81 @@ last attach a pic of react-redux
 
 ![react-redux](/img/webframe/react-redux.png "react-redux")
 
+...react-redux is done
+
 来源： https://www.w3ctech.com/topic/1561
 
-2. dva (一个简化 erdux 的库)
+# 2. dva (一个简化 redux 的库)
 
 > dva 是基于现有应用架构 (redux + react-router + redux-saga 等)的一层轻量封装，没有引入任何新概念，是框架，不是 library，类似 emberjs，会很明确地告诉你每个部件应该怎么写，这对于团队而言，会更可控
 
 dva 中的 model 实际上类似于封装了 redux 里面的 action 和 reducer，并给每个 model 提供一个 namespace 交于 strore 管理。这样，在外部引用的时候，可以直接获取到 model 对应的 namespace，然后根据 namespace 获取数据。
 
-dva-cli 可快速初始化一个项目，基于 Roadhog(一个 cli 工具,提供 server、 build 和 test 命令)，可在.roadhogrc.js 自行配置转发，插件等需要的
+dva-cli 可快速初始化一个项目，基于 Roadhog(一个 cli 工具,提供 server、 build 和 test 命令)，可在.roadhogrc.js 自行配置转发，插件等需要的。
 
+create 一个 app的步骤
+
+      npm i dva-cli -g
+      dva new projectname
+      npm i
+      npm start
+
+### 这里分享我的配置文件
 ```js
-// npm i dva-cli -g
-// dva new project
-// npm i
-// npm start
+// .roadhog.js
+// 代理目标地址
+const _target = "https://a.b.com";
+const path = require("path");
+export default {
+  entry: "src/index.js",
+  disableCSSModules: false,
+  autoprefixer: null,
+  theme: {
+    "@primary-color": "#...",
+    "@link-color": "#...",
+    "@border-radius-base": "2px",
+    "@font-size-base": "13px",
+    "@animation-duration-slow": ".2s",
+    "@animation-duration-base": ".2s"
+  },
+  proxy: {
+    "/api": {
+      target: _target,
+      changeOrigin: true
+    },
+  },
+  extraBabelPlugins: [
+    "transform-runtime",
+    ["import", { libraryName: "antd", style: true }],
+    [
+      "module-resolver",
+      {
+        root: ["./src"],
+        alias: {
+          components: path.resolve(__dirname, "src/components/"),
+          config: path.resolve(__dirname, "src/config/"),
+          models: path.resolve(__dirname, "src/models/"),
+          routes: path.resolve(__dirname, "src/routes/"),
+          services: path.resolve(__dirname, "src/services"),
+          constants: path.resolve(__dirname, "src/constants"),
+          assets: path.resolve(__dirname, "src/assets"),
+          utils: path.resolve(__dirname, "src/utils"),
+          nodeModule: path.resolve(__dirname, "node_modules")
+        }
+      }
+    ]
+  ],
+  env: {
+    development: {
+      extraBabelPlugins: ["dva-hmr"]
+    }
+  },
+  publicPath: "/public×××/"
+};
 
+```
+### dva 初始化部分
+```js
 import dva from "dva";
 import createLoading from "dva-loading";
 import { browserHistory } from "dva/router";
@@ -192,16 +250,100 @@ const app = dva({
   }
   //history: browserHistory,
 });
-
 // 2. Plugins
 app.use(createLoading({ effects: true }));
-
+// loading使用 loading.effects['user/query']
 // 3. Model
 app.model(require("./models/app"));
-
 // 4. Router
 app.router(require("./router"));
-
 // 5. Start
 app.start("#root");
 ```
+### 这里最主要是 model，将 reducer action 合并，写起来更加方便，model 包括以下
+
+namespace 命名空间，每个模块的唯一标志
+
+state 各个模块的数据存放地
+
+subscriptions 监听数据 在 app.start() 是执行 一般页面里面初始数据 也可写在 componentDidMount hook
+
+effects 异步操作 接收数据 改变数据的唯一途径
+
+reducers 处理数据，唯一可以修改 state 的地方，由 action 触发
+
+```js
+// 一个model 例子
+import { hashHistory, routerRedux } from "dva/router";
+export default {
+  namespace: "app",
+  state: {
+    data: [],
+    obj: {}
+  },
+  subscriptions: {
+    setup({ dispatch, history }) {
+      history.listen(({ pathname, query }) => {
+        dispatch({ type: "query", payload: {} });
+      });
+    }
+  },
+  effects: {
+    *query({ payload }, { select, put, call }) {
+      // 异步请求
+      const res = yield call('接口', payload);
+      // put  用来发起一条action
+      // call 以异步的方式调用函数
+      // select 从state中获取相关的数据
+      // take 获取发送的数据
+      // 可实现跳转路由
+      yield put(routerRedux.push('/other'))
+      yield put({
+        type: "querySuccess",
+        payload: res
+      });
+    }
+  },
+  reducers: {
+    querySuccess(state, { payload }) {
+      return {
+        ...state,
+        data: res.data
+      };
+    }
+  }
+};
+```
+
+### router 文件 和 component 文件
+
+```js
+import React from 'react';
+import { connect } from 'dva';
+function App({ location, dispatch, app, params }) {
+  // app  model里面 ，params 当路由带参数的时候，是参数的obj
+  const config = {
+    ...app,
+    location,
+    // es6写法， 对象的方法
+    query(params) {
+      dispatch({
+        type: 'app/query',
+        payload: params,
+      });
+    },
+  };
+  return (
+    <div>
+      <Components {...config} />
+      {/*来自类组件  有状态和生命周期*/}
+    </div>
+  )
+}
+
+function mapStateToProps({ app }) {
+  return { app };
+}
+export default connect(mapStateToProps)(App);
+```
+...dva is done
