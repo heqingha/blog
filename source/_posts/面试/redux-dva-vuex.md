@@ -15,6 +15,8 @@ date: 2019-03-01 16:42:20
 
 ### Redux → Store &nbsp; Action &nbsp; Reducer (下面分开介绍，并附上主代码)
 
+> 文章开头先概括redux, 创建store(连接reducer&action)数据会存放在store，会分发成各个小state, reducer也会可分发，页面开始渲染初始state，当用户操作需要改变数据的时候，只能通过dispatch发送action途径改变，之后触发reducer纯函数，接受state，action，返回新的state数据，render页面，完成页面update
+
 ### Store（一个应用只有一个 store，将 action 和 reducer 联系在一起）
 
 ```js
