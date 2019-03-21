@@ -19,7 +19,11 @@ CommonJS 中有一个全局性方法 require()，用于加载模块
 
 require()用来引入外部模块；exports 对象用于导出当前模块的方法或变量，唯一的导出口；module 对象就代表模块本身。
 
-NodeJS 是 CommonJS 规范的实现，运行在服务端，不支持浏览器环境，因此大家希望有个可以运行在两者上面的, 但由于 require 是同步的，如果加载的时间过长，会阻塞，在服务器端不是什么问题，因为所有的模块都存放在本地硬盘，可以同步加载完成，等待时间就是硬盘的读取时间，但是在浏览器算是个大问题，因为模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于"假死"状态。因此 AMD(异步模块定义)出现了，它就主要为前端 JS 的表现制定规范。
+NodeJS 是 CommonJS 规范的实现，运行在服务端，浏览器中使用就需要用到 Browserify 解析了
+因此大家希望有个可以运行在两者上面的, 但由于 require 是同步的，如果加载的时间过长，会阻塞
+在服务器端不是什么问题，因为所有的模块都存放在本地硬盘，可以同步加载完成，等待时间就是硬盘的读取时间
+但在浏览器算是个大问题，因为模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于"假死"状态
+因此 AMD(异步模块定义)出现了，它就主要为前端 JS 的表现制定规范。
 
 ```js
 //
@@ -118,5 +122,57 @@ define(function(require,exports,module){...});
 4. 对开发调试的支持有差异。Sea.js 非常关注代码的开发调试，有 nocache、debug 等用于调试的插件。RequireJS 无这方面的明显支持。
 
 5. 插件机制不同。RequireJS 采取的是在源码中预留接口的形式，插件类型比较单一。Sea.js 采取的是通用事件机制，插件类型更丰富。
+
+### Es6 module
+
+ 在Babel的帮助下，我们可以直接使用 ES6 的模块化,也可以在script标签中使用tpye="module"在同域的情况下可以解决（非同域情况会被同源策略拦截，webstorm会开启一个同域的服务器没有这个问题，vscode貌似不行）
+
+ ```js
+ // file a.js
+ export function a() {}
+ export function b() {}
+ let x = 1
+// file b.js
+ export {x}
+ export default x
+ export default function() {}
+ //  export {<变量>}导出的是一个变量的引用，export default导出的是一个值
+ // 就是说在a.js中使用import导入这2个变量的后，在module.js中因为某些原因x变量被改变了，那么会立刻反映到a.js，而module.js中的y变量改变后，a.js中的y还是原来的值
+ import {a, b} from './a.js'
+ import XXX from './b.js'
+ // default 只能有一个
+
+ // 这里和commonjs 做个对比
+
+ // a.js
+module.exports = {
+    a: 1
+}
+// or
+exports.a = 1
+
+// b.js
+var module = require('./a.js')
+module.a // -> log 1
+
+// 这个是为什么 exports 和 module.exports 用法相似的原因
+
+var module = {
+  exports: {} // exports 就是个空对象
+}
+var exports = module.exports
+ ```
+
+ESS6 Module使用import关键字导入模块，export关键字导出模块
+
+
+ES6 Module是静态的，也就是说它是在编译阶段运行，和var以及function一样具有提升效果（这个特点使得它支持tree shaking）
+
+自动采用严格模式（顶层的this返回undefined）
+
+ES6 Module支持使用export {<变量>}导出具名的接口，或者export default导出匿名的接口
+
+module.js导出:
+
 
 from： https://www.cnblogs.com/chenguangliang/p/5856701.html
