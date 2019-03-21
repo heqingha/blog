@@ -285,7 +285,9 @@ export default {
   namespace: "app",
   state: {
     data: [],
-    obj: {}
+    obj: {
+      a: {}
+    }
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -300,13 +302,13 @@ export default {
       const res = yield call("接口", payload);
       // put  用来发起一条action
       // call 以异步的方式调用函数
-      // select 从state中获取相关的数据
+      // select 从state中获取相关的数据  const a = yield select(state => state.obj.a);
       // take 获取发送的数据
       // 可实现跳转路由
       yield put(routerRedux.push("/other"));
       yield put({
         type: "querySuccess",
-        payload: res
+        payload: a
       });
     }
   },
@@ -314,7 +316,7 @@ export default {
     querySuccess(state, { payload }) {
       return {
         ...state,
-        data: res.data
+        data: a
       };
     }
   }
