@@ -3,7 +3,7 @@ title: shallow copy and deep copy of the objects
 categories:
   - web skill
 tags:
-  - web skill
+  - js
 date: 2019-03-20 17:44:40
 ---
 

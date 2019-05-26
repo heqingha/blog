@@ -502,4 +502,10 @@ style变动造成repaint和reflow。
 避免使用table进行布局：table的每个元素的大小以及内容的改动，都会导致整个table进行重新计算，造成大幅度的repaint或者reflow。改用div则可以进行针对性的repaint和避免不必要的reflow。
 避免在CSS中使用运算式：学习CSS的时候就知道，这个应该避免，不应该加深到这一层再去了解，因为这个的后果确实非常严重，一旦存在动画性的repaint/reflow，那么每一帧动画都会进行计算，性能消耗不容小觑。
 
-[](https://segmentfault.com/a/1190000002629708)
+[interview](https://segmentfault.com/a/1190000002629708)
+[webpack](https://segmentfault.com/a/1190000014148611)
+[http](https://www.cnblogs.com/daisygogogo/p/10741597.html)
+[http](https://www.cnblogs.com/ranyonsue/p/5984001.html)
+[tcp/ip](https://blog.csdn.net/qq_41517936/article/details/80886618)
+[es6解析](https://juejin.im/post/5c6234f16fb9a049a81fcca5)
+[SSR](https://www.jianshu.com/p/10b6074d772c)

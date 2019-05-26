@@ -3,7 +3,7 @@ title: ajax & xhr
 categories:
   - web skill
 tags:
-  - js
+  - ajax
 date: 2019-05-26 11:03:20
 ---
 
@@ -83,9 +83,17 @@ xhr.onreadystatechange = function() {
 6. 封装使用
 
 ```js
-function ajax(options) {
+const xhr = ({
+  url,
+  data,
+  body = null,
+  method = "POST",
+  async = true,
+  contentType = "application/x-www-form-urlencoded",
+  success
+}) => {
   var xhr = null;
-  var params = formsParams(options.data);
+  var params = formsParams(data);
   function formsParams(data) {
     var arr = [];
     for (var prop in data) {
@@ -100,30 +108,28 @@ function ajax(options) {
     xhr = new ActiveXObject("Microsoft.XMLHTTP");
   }
   // 连接
-  if (options.type == "GET") {
-    xhr.open(options.type, options.url + "?" + params, options.async);
+  if (method == "GET") {
+    xhr.open(method, url + "?" + params, async);
     xhr.send(null);
-  } else if (options.type == "POST") {
-    xhr.open(options.type, options.url, options.async);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  } else if (method == "POST") {
+    xhr.open(method, url, async);
+    xhr.setRequestHeader(contentType);
     xhr.send(params);
   }
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = () = > {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      options.success(xhr.responseText);
+      success(xhr.responseText);
     }
   };
-  
-}
+};
 
-ajax({
-  url: "a.php", // url---->地址
-  type: "POST", // type ---> 请求方式
-  async: true, // async----> 同步：false，异步：true
+xhr({
+  url: "a.php",
+  type: "POST",
+  //   async: true,
   data: {
-    //传入信息
-    name: "张三",
-    age: 18
+    name: "me",
+    age: 24
   },
   success: function(data) {
     //返回接受信息

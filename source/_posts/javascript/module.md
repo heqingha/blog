@@ -197,4 +197,4 @@ ES6 Module使用import关键字导入模块，export关键字导出模块,特点
 import ('a.js').then((res) => {})
 ```
 from： https://www.cnblogs.com/chenguangliang/p/5856701.html
-form： https://yuchengkai.cn/docs/frontend/#commonjs
+from： https://yuchengkai.cn/docs/frontend/#commonjs

@@ -3,7 +3,7 @@ title: browser & js
 categories:
   - web skill
 tags:
-  - web skill
+  - Event Loop & browser
 date: 2019-02-22 09:44:20
 ---
 
