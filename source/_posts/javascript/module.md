@@ -140,9 +140,11 @@ define(function(require,exports,module){...});
  // 就是说在a.js中使用import导入这2个变量的后，在module.js中因为某些原因x变量被改变了，那么会立刻反映到a.js，而module.js中的y变量改变后，a.js中的y还是原来的值
  import {a, b} from './a.js'
  import XXX from './b.js'
+ export {x as default}
+ // 但是由于是使用export {<变量>}这种形式导出的模块,即使被重命名为default,仍然导出的是一个变量的引用
  // default 只能有一个
 
- // 这里和commonjs 做个对比
+ 这里和commonjs 做个对比
 
  // a.js
 module.exports = {
@@ -163,16 +165,36 @@ var module = {
 var exports = module.exports
  ```
 
-ESS6 Module使用import关键字导入模块，export关键字导出模块
+#### 总结es6 和 commonjs
 
+ES6 Module使用import关键字导入模块，export关键字导出模块,特点：
 
-ES6 Module是静态的，也就是说它是在编译阶段运行，和var以及function一样具有提升效果（这个特点使得它支持tree shaking）
+    ES6 Module是静态的，也就是说它是在编译阶段运行，和var以及function一样具有提升效果
 
-自动采用严格模式（顶层的this返回undefined）
+    自动采用严格模式（顶层的this返回undefined）
 
-ES6 Module支持使用export {<变量>}导出具名的接口，或者export default导出匿名的接口
+    ES6 Module支持使用export {<变量>}导出具名的接口，或者export default导出匿名的接口
 
-module.js导出:
+#### 两者不同
 
+1. CommonJs输出的是一个值的拷贝,ES6 Module通过export {<变量>}输出的是一个变量的引用,export default输出的是一个值
 
+2. CommonJs运行在服务器上,被设计为运行时加载,即代码执行到那一行才回去加载模块,而ES6 Module是静态的输出一个接口,发生在编译的阶段
+
+3. CommonJs在第一次加载的时候运行一次并且会生成一个缓存,之后加载返回的都是缓存中的内容
+
+4. 前者支持动态导入，也就是 require(${path}/xx.js)，后者目前不支持，但是已有提案
+
+5. 前者是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
+
+6. 前者在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是后者采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化
+
+7. 后者会编译成 require/exports 来执行的
+
+关于ES6 Module静态编译的特点,导致了无法动态加载,但是总是会有一些需要动态加载模块的需求,所以现在有一个提案,使用把import作为一个函数可以实现动态加载模块,它返回一个Promise,Promise被resolve时的值为输出的模块
+
+```js
+import ('a.js').then((res) => {})
+```
 from： https://www.cnblogs.com/chenguangliang/p/5856701.html
+form： https://yuchengkai.cn/docs/frontend/#commonjs
