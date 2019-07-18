@@ -122,4 +122,4 @@ var sum = values.reduce(function(prev, cur, index, array) {
 
 [css88](http://www.css88.com/archives/7781)
 
-[2018 最新 Web 前端经典面试试题及答案](https://blog.csdn.net/wdlhao/article/details/79079660)
+
