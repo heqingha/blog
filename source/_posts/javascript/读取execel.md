@@ -1,10 +1,10 @@
 ---
-title: 行为型设计模式
+title: excel读取
 categories:
-  - web skill
+  - 实例
 tags:
   - js
-date: 2017-12-05 10:41:20
+date: 2019-07-21 11:41:20
 ---
 
 ```js

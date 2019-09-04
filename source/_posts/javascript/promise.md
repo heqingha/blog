@@ -13,6 +13,8 @@ date: 2019-03-08 14:14:10
 
 我们就可以利用 then 进行「链式回调」，将异步操作以同步操作的流程表示出来,避免厄运回调金字塔，Promise 有三种状态（pending，fulfilled，rejected）有两种状态的改变&API
 
+[Promise](https://blog.csdn.net/qq_34645412/article/details/81170576)
+
 1. pending----->fulfilled 成功
 2. pending----->rejected 失败
 3. 一旦状态改变，promise.then 绑定的函数就会被调用，然后一直保持这个状态
@@ -131,3 +133,7 @@ sendRequest("test.html", "")
   console.log("sorry, 请求失败了, 这是失败信息:", error);
 });
 ````
+
+
+
+
