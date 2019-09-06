@@ -10,6 +10,10 @@ date: 2019-06-18 11:16:40
 
 <!--more -->
 
+react 16
+
+* [react 16](https://segmentfault.com/a/1190000017321982)
+
 react 高阶组件
 
 * [React进阶之高阶组件](https://www.cnblogs.com/libin-1/p/7087605.html)
