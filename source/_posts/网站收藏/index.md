@@ -4,7 +4,7 @@ categories:
   - collection
 tags:
   - collection
-date: 2019-07-18 11:16:40
+date: 2019-06-18 11:16:40
 ---
 收藏的一些网站
 
@@ -32,6 +32,10 @@ MVVM 原理
 ES6语法知识点补充
 
 2. https://juejin.im/post/5c6234f16fb9a049a81fcca5
+
+高频js 手写
+
+https://mp.weixin.qq.com/s/CY-igdCB_U-DtA4E2BKhhA
 
 prototype
 
